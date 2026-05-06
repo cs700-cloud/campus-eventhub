@@ -1,48 +1,57 @@
 package com.eventplanner;
 import java.util.Date;
 
-enum Status{
+enum eventStatus{
     DRAFT,
     PUBLISHED,
     ACTIVE,
     COMPLETED,
-    ARCHIVED
+    ARCHIVED,
+    REJECTED
 }
 
 public class Event {
     //Create/Edit/Delete Events (with venue, date, time, type, description, etc.) 
     int capacity;
     Date date;
-    String venueID;
+    int organizerID;
+    int venueID;
     String time;
     String type;
     String description;
-    Status status;
+    eventStatus status;
     User[] attendees;
     User[] waitlist;
 
-    public void constructor(String venueID, Date date, String time, String type, int capacity){
+    public Event(int venueID, Date date, String time, String type, int capacity){
         this.venueID = venueID;
         this.date = date;
         this.time = time;
         this.type = type;
         this.description = "";
         this.capacity = capacity;
-        this.status = Status.PUBLISHED;
+        this.status = eventStatus.PUBLISHED;
 
         this.attendees = new User[capacity];
     }
 
-    public void constructor(String venueID, Date date, String time, String type, String description, int capacity){
+    public Event(int venueID, Date date, String time, String type, String description, int capacity){
         this.venueID = venueID;
         this.date = date;
         this.time = time;
         this.type = type;
         this.description = description;
         this.capacity = capacity;
-        this.status = Status.PUBLISHED;
+        this.status = eventStatus.PUBLISHED;
 
         this.attendees = new User[capacity];
     }
 
+    public Date getDate(){
+        return this.date;
+    }
+    
+    public String getTime(){
+        return this.time;
+    }
 }
