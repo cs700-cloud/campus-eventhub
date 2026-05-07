@@ -20,4 +20,12 @@ public class Venue {
     public String getName(){
         return this.name;
     }
+
+    public int getCapacity(){
+        return this.capacity;
+    }
+
+    public String[] getEquipment(){
+        return this.equipment;
+    }
 }

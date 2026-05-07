@@ -1,4 +1,6 @@
 package com.eventplanner;
+import java.util.List;
+
 
 enum Role {
     ADMIN,
@@ -20,6 +22,8 @@ class User {
     private Role role;
     private Status status;
     private boolean emailVerified;
+    private List<Event> events;
+    private List<Event> wishlist;
     
     public User(int id, String name, String email, String password, Role role) {
         this.id = id;
@@ -30,6 +34,19 @@ class User {
         this.status = Status.PENDING;
         this.emailVerified = false;
     }
+
+    public void addRegisteredEvent(Event newEvent){
+        this.events.add(newEvent);
+    }
+
+    public void removeRegisteredEvent(Event event){
+        this.events.remove(event);
+    }
+
+    public void addWishlistEvent(Event event){
+        this.wishlist.add(event);
+    }
+
     //Getters
     public int getId() {
         return this.id;
@@ -52,6 +69,14 @@ class User {
     }
     public Status getStatus() {
         return this.status;
+    }
+
+    public List<Event> getRegisteredEvents(){
+        return this.events;
+    }
+
+    public List<Event> getWishlist(){
+        return this.wishlist;
     }
 
     public boolean isEmailVerified() {

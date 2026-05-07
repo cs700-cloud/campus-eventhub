@@ -30,7 +30,7 @@ public class EventManager {
         System.out.println("Please input the capacity of the event you will be holding:");
         int capacity = scanner.nextInt();
         Event newEvent = new Event(venueID, date, name, time, type, description, capacity);
-        newEvent.organizerID = user.getID();
+        newEvent.organizerID = user.getId();
 
         Database.events.add(newEvent);
         
@@ -98,17 +98,11 @@ public class EventManager {
 
     //BASIC METHODS
 
-    public static void register(User user, Event newEvent){
-        if(ConflictDetector.isConflict(user.getEvents(), newEvent)){
-            System.out.println("You have already registered for another event in that timeslot.");
-        }
-    }
-
     public static void viewEvents(){
         for(Event e : Database.events){
             System.out.println(
                 e.getName() + " | " +
-                e.getVenueId() + " | " +
+                e.getVenueID() + " | " +
                 e.getDate()
             );
         }
