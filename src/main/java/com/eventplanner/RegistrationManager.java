@@ -2,7 +2,7 @@ package com.eventplanner;
 
 public class RegistrationManager {
 
-    public void registerForEvent(User attendee, Event event) {
+    public static void registerForEvent(User attendee, Event event) {
         if (!attendee.isAttendee()) {
             System.out.println("Only attendees can register for events.");
             return;
@@ -29,7 +29,7 @@ public class RegistrationManager {
             return;
         }
 
-        if (hasScheduleConflict(attendee, event)) {
+        if (ConflictDetector.isConflict(attendee.getRegisteredEvents(), event)) {
             System.out.println("Schedule conflict detected.");
             return;
         }

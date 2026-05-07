@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class AdminMenu {
     public static void adminMenu(User user) {
+        User currentUser = user;
         Scanner scanner = new Scanner(System.in);
         while (true) {
 
@@ -17,14 +18,23 @@ public class AdminMenu {
             switch (choice) {
 
                 case 1:
-                    addVenue();
+                    System.out.println("Please input the ID of the venue you wish to create:");
+                    int venueID = scanner.nextInt();
+                    System.out.println("Please input the name of your venue:");
+                    String name = scanner.next();
+                    System.out.println("Please input the capacity of your venue:");
+                    int capacity = scanner.nextInt();
+                    String[] equipment = new String[20];
+                    Venue newVenue = new Venue(venueID, name, capacity, equipment);
+                    VenueManager.addVenue(currentUser, newVenue);
                     break;
 
                 case 2:
-                    viewEvents(user);
+                    EventManager.viewEvents();
                     break;
 
                 case 3:
+                    scanner.close();
                     return;
 
                 default:

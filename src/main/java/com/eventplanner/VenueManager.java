@@ -1,10 +1,10 @@
 package com.eventplanner;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class VenueManager {
 
-    public void addVenue(User admin, Venue venue) {
+    public static void addVenue(User admin, Venue venue) {
         if (!admin.isAdmin()) {
             System.out.println("Only admins can add venues.");
             return;
@@ -36,7 +36,7 @@ public class VenueManager {
         System.out.println("Venue removed: " + venue.getName());
     }
 
-    public Venue findVenueById(int venueID) {
+    public static Venue findVenueById(int venueID) {
         for (Venue venue : Database.venues) {
             if (venue.getID() == venueID) {
                 return venue;
@@ -57,7 +57,7 @@ public class VenueManager {
         }
     }
 
-    public boolean isVenueAvailable(int venueID, Date date, String time) {
+    public boolean isVenueAvailable(int venueID, LocalDate date, String time) {
         for (Event event : Database.events) {
             if (event.getVenueID() == venueID &&
                 event.getDate().equals(date) &&

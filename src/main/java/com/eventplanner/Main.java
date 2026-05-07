@@ -7,6 +7,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        User adminAccount = new User(1, "admin", "admin@nyu.edu", "12345", Role.ADMIN);
+        User organizerAccount = new User(2, "organizer", "organizer@nyu.edu", "12345", Role.ORGANIZER);
+        User attendeeAccount = new User(3, "attendee", "attendee@nyu.edu", "12345", Role.ATTENDEE);
+        Database.users.add(adminAccount); Database.users.add(organizerAccount); Database.users.add(attendeeAccount);
         while (true) {
 
             System.out.println("\n=== Campus EventHub ===");

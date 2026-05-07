@@ -15,6 +15,7 @@ public class Event {
     //Create/Edit/Delete Events (with venue, date, time, type, description, etc.) 
     int capacity;
     LocalDate date;
+    int eventID;
     int organizerID;
     int venueID;
     String name;
@@ -86,6 +87,10 @@ public class Event {
         User removeduser = this.waitlist.get(0);
         this.waitlist.remove(0);
         return removeduser;
+    }
+
+    public int getID(){
+        return this.eventID;
     }
 
     public String getName(){

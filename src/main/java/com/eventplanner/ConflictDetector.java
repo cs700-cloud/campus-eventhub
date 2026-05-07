@@ -8,7 +8,9 @@ class ConflictDetector {
     public static boolean isConflict(List<Event> userEvents, Event newEvent) {
         return userEvents.stream().anyMatch(e ->
             e.getDate().equals(newEvent.getDate()) &&
-            e.getTime().equals(newEvent.getTime())
+            e.getTime().equals(newEvent.getTime()) &&
+            e.getStatus() != eventStatus.COMPLETED &&
+            e.getStatus() != eventStatus.ARCHIVED
         );
     }
 

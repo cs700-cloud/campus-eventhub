@@ -24,14 +24,29 @@ public class AttendeeMenu {
                     break;
 
                 case 2:
-                    register(currentUser);
+                    System.out.println("Please input the ID of the event you wish to register for:");
+                    int eventID = scanner.nextInt();
+                    Event desiredEvent = null;
+                    for(Event e : Database.events){
+                        if(e.getID() == eventID){
+                            desiredEvent = e;
+                            break;
+                        }
+                    }
+                    if(desiredEvent == null){
+                        System.out.println("Event ID not found. Please try again.");
+                        break;
+                    }
+
+                    RegistrationManager.registerForEvent(currentUser, desiredEvent);
                     break;
 
                 case 3:
-                    qrCheckIn();
+                    EventManager.qrCheckIn(currentUser);
                     break;
 
                 case 4:
+                    scanner.close();
                     return;
             }
         }
