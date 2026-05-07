@@ -1,13 +1,48 @@
 package com.eventplanner;
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class EventManager {
     
+
+    static Scanner scanner = new Scanner(System.in);
     //ORGANIZER METHODS
-    public void rescheduleEvent(User user, Event event, Date date, String time){
+
+    public static void createEvent(User user){
+        System.out.println("Please input the ID of the venue you wish to book:");
+        int venueID = scanner.nextInt();
+        System.out.println("Please input the date when the event will occur (yyyy-mm-dd):");
+        LocalDate date = LocalDate.parse(scanner.next());
+        System.out.println("Please input the name of your event:");
+        String name = scanner.next();
+        System.out.println("Please input the time your event will begin:");
+        String time = scanner.next();
+
+        if(!ConflictDetector.isVenueAvailable(Database.events, venueID, date, time)){
+            System.out.println("Timeslot unavailable for venue. Please try another timeslot.");
+            return;
+        }
+
+        System.out.println("Please input the type of event you will be holding:");
+        String type = scanner.next();
+        System.out.println("Please input a description of the event you will be holding:");
+        String description = scanner.next();
+        System.out.println("Please input the capacity of the event you will be holding:");
+        int capacity = scanner.nextInt();
+        Event newEvent = new Event(venueID, date, name, time, type, description, capacity);
+        newEvent.organizerID = user.getID();
+
+        Database.events.add(newEvent);
+        
+    }
+
+    public void rescheduleEvent(User user, Event event, LocalDate date, String time){
         if(!user.isOrganizer()){
             System.out.println("You do not have permission to perform this action.");
+            return;
+        }
+        if(!ConflictDetector.isVenueAvailable(Database.events, event.venueID, date, time)){
+            System.out.println("Timeslot unavailable for venue. Please try another timeslot.");
             return;
         }
         event.date = date;
@@ -59,5 +94,23 @@ public class EventManager {
             return;
         }
         event.status = eventStatus.REJECTED;
+    }
+
+    //BASIC METHODS
+
+    public static void register(User user, Event newEvent){
+        if(ConflictDetector.isConflict(user.getEvents(), newEvent)){
+            System.out.println("You have already registered for another event in that timeslot.");
+        }
+    }
+
+    public static void viewEvents(){
+        for(Event e : Database.events){
+            System.out.println(
+                e.getName() + " | " +
+                e.getVenueId() + " | " +
+                e.getDate()
+            );
+        }
     }
 }

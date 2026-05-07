@@ -1,5 +1,5 @@
 package com.eventplanner;
-import java.util.Date;
+import java.time.LocalDate;
 
 enum eventStatus{
     DRAFT,
@@ -13,9 +13,10 @@ enum eventStatus{
 public class Event {
     //Create/Edit/Delete Events (with venue, date, time, type, description, etc.) 
     int capacity;
-    Date date;
+    LocalDate date;
     int organizerID;
     int venueID;
+    String name;
     String time;
     String type;
     String description;
@@ -23,9 +24,10 @@ public class Event {
     User[] attendees;
     User[] waitlist;
 
-    public Event(int venueID, Date date, String time, String type, int capacity){
+    public Event(int venueID, LocalDate date, String name, String time, String type, int capacity){
         this.venueID = venueID;
         this.date = date;
+        this.name = name;
         this.time = time;
         this.type = type;
         this.description = "";
@@ -35,9 +37,10 @@ public class Event {
         this.attendees = new User[capacity];
     }
 
-    public Event(int venueID, Date date, String time, String type, String description, int capacity){
+    public Event(int venueID, LocalDate date, String name, String time, String type, String description, int capacity){
         this.venueID = venueID;
         this.date = date;
+        this.name = name;
         this.time = time;
         this.type = type;
         this.description = description;
@@ -47,11 +50,19 @@ public class Event {
         this.attendees = new User[capacity];
     }
 
-    public Date getDate(){
+    public String getName(){
+        return this.name;
+    }
+
+    public LocalDate getDate(){
         return this.date;
     }
     
     public String getTime(){
         return this.time;
+    }
+
+    public int getVenueId(){
+        return this.venueID;
     }
 }
