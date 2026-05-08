@@ -3,39 +3,36 @@ import java.util.Scanner;
 
 
 public class LoginMenu {
-    
-    public static void loginMenu() {
-        Scanner scanner = new Scanner(System.in);
-        User currentUser;
-        System.out.println("Please input your Email:");
-        String email = scanner.next();
-        System.out.println("Please input your Password:");
-        String password = scanner.next();
 
-        for(User x : Database.users){
-            if(x.getEmail() == email && x.getPassword() == password){
-                currentUser = x;
-                if(currentUser.getRole() == Role.ADMIN){
-                    AdminMenu.adminMenu(currentUser);
-                    scanner.close();
-                    break;
+    public static void loginMenu(Scanner scanner) {
+
+        System.out.println("Please input your Email:");
+        String email = scanner.nextLine().trim();
+
+        System.out.println("Please input your Password:");
+        String password = scanner.nextLine().trim();
+
+        for (User x : Database.users) {
+
+            if (x.getEmail().equals(email) &&
+                x.getPassword().equals(password)) {
+
+                if (x.getRole() == Role.ADMIN) {
+                    AdminMenu.adminMenu(x, scanner);
                 }
-                if(currentUser.getRole() == Role.ORGANIZER){
-                    OrganizerMenu.organizerMenu(currentUser);
-                    scanner.close();
-                    break;
+
+                else if (x.getRole() == Role.ORGANIZER) {
+                    OrganizerMenu.organizerMenu(x, scanner);
                 }
-                else{
-                    AttendeeMenu.attendeeMenu(currentUser);
-                    scanner.close();
-                    break;
+
+                else {
+                    AttendeeMenu.attendeeMenu(x, scanner);
                 }
-            }
-            else{
-                System.out.println("User not found.");
-                scanner.close();
+
                 return;
             }
         }
+
+        System.out.println("User not found.");
     }
 }

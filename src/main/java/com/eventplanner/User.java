@@ -35,8 +35,8 @@ class User {
         this.emailVerified = false;
     }
 
-    public void addRegisteredEvent(Event newEvent){
-        this.events.add(newEvent);
+    public void addRegisteredEvent(Event event){
+        this.events.add(event);
     }
 
     public void removeRegisteredEvent(Event event){
@@ -107,17 +107,6 @@ class User {
     }
 
     //Roles
-
-    public boolean isOrganizer(){
-        return this.role == Role.ORGANIZER;
-    }
-
-    public boolean isAdmin(){
-        return this.role == Role.ADMIN;
-    }
-    public boolean isAttendee() {
-        return this.role == Role.ATTENDEE;
-    }
 
     public boolean isActive() {
         return this.status == Status.ACTIVE;

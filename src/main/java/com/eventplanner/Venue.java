@@ -1,10 +1,10 @@
 package com.eventplanner;
 
 public class Venue {
-    int id;
-    String name;
-    int capacity;
-    String[] equipment;
+    public int id;
+    public String name;
+    public int capacity;
+    public String[] equipment;
 
     public Venue(int id, String name, int capacity, String[] equipment){
         this.id = id;

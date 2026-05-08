@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class VenueManager {
 
     public static void addVenue(User admin, Venue venue) {
-        if (!admin.isAdmin()) {
+        if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can add venues.");
             return;
         }
@@ -20,7 +20,7 @@ public class VenueManager {
     }
 
     public void removeVenue(User admin, int venueID) {
-        if (!admin.isAdmin()) {
+        if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can remove venues.");
             return;
         }

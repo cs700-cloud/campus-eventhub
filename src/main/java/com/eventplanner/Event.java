@@ -124,4 +124,8 @@ public class Event {
     public String getType(){
         return this.type;
     }
+
+    public void setStatus(eventStatus e){
+        this.status = e;
+    }
 }

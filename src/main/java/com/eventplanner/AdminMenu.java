@@ -3,9 +3,7 @@ import java.util.Scanner;
 
 
 public class AdminMenu {
-    public static void adminMenu(User user) {
-        User currentUser = user;
-        Scanner scanner = new Scanner(System.in);
+    public static void adminMenu(User user, Scanner scanner) {
         while (true) {
 
             System.out.println("\n=== Admin Menu ===");
@@ -20,13 +18,15 @@ public class AdminMenu {
                 case 1:
                     System.out.println("Please input the ID of the venue you wish to create:");
                     int venueID = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.println("Please input the name of your venue:");
-                    String name = scanner.next();
+                    String name = scanner.nextLine();
                     System.out.println("Please input the capacity of your venue:");
                     int capacity = scanner.nextInt();
+                    scanner.nextLine();
                     String[] equipment = new String[20];
                     Venue newVenue = new Venue(venueID, name, capacity, equipment);
-                    VenueManager.addVenue(currentUser, newVenue);
+                    VenueManager.addVenue(user, newVenue);
                     break;
 
                 case 2:
@@ -34,7 +34,6 @@ public class AdminMenu {
                     break;
 
                 case 3:
-                    scanner.close();
                     return;
 
                 default:

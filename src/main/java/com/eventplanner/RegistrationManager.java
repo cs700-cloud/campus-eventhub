@@ -3,7 +3,7 @@ package com.eventplanner;
 public class RegistrationManager {
 
     public static void registerForEvent(User attendee, Event event) {
-        if (!attendee.isAttendee()) {
+        if (!attendee.getRole().equals(Role.ATTENDEE)) {
             System.out.println("Only attendees can register for events.");
             return;
         }
@@ -93,7 +93,7 @@ public class RegistrationManager {
     }
 
     public void addToWishlist(User attendee, Event event) {
-        if (!attendee.isAttendee()) {
+        if (!attendee.getRole().equals(Role.ATTENDEE)) {
             System.out.println("Only attendees can add events to wishlist.");
             return;
         }

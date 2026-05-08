@@ -3,10 +3,7 @@ import java.util.Scanner;
 
 public class AttendeeMenu {
 
-    public static void attendeeMenu(User user) {
-
-        User currentUser = user;
-        Scanner scanner = new Scanner(System.in);
+    public static void attendeeMenu(User user, Scanner scanner) {
         while (true) {
 
             System.out.println("\n=== Attendee Menu ===");
@@ -24,11 +21,11 @@ public class AttendeeMenu {
                     break;
 
                 case 2:
-                    System.out.println("Please input the ID of the event you wish to register for:");
-                    int eventID = scanner.nextInt();
+                    System.out.println("Please input the name of the event you wish to register for:");
+                    String eventID = scanner.nextLine().trim().toLowerCase();
                     Event desiredEvent = null;
                     for(Event e : Database.events){
-                        if(e.getID() == eventID){
+                        if(e.getName().trim().toLowerCase() == eventID){
                             desiredEvent = e;
                             break;
                         }
@@ -38,15 +35,14 @@ public class AttendeeMenu {
                         break;
                     }
 
-                    RegistrationManager.registerForEvent(currentUser, desiredEvent);
+                    RegistrationManager.registerForEvent(user, desiredEvent);
                     break;
 
                 case 3:
-                    EventManager.qrCheckIn(currentUser);
+                    EventManager.qrCheckIn(user);
                     break;
 
                 case 4:
-                    scanner.close();
                     return;
             }
         }

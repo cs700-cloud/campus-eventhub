@@ -62,7 +62,7 @@ public class AuthManager {
 
         // For normal attendees, email verification can activate the account.
         // Organizers may still require admin approval depending on your rules.
-        if (user.isAttendee() || user.isAdmin()) {
+        if (user.getRole().equals(Role.ATTENDEE) || user.getRole().equals(Role.ADMIN)) {
             user.setStatus(Status.ACTIVE);
         }
 
@@ -71,7 +71,7 @@ public class AuthManager {
 
     // Admin approves pending organizer or user account
     public void approveUser(User admin, User targetUser) {
-        if (!admin.isAdmin()) {
+        if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can approve users.");
             return;
         }
@@ -87,7 +87,7 @@ public class AuthManager {
 
     // Admin suspends user account
     public void suspendUser(User admin, User targetUser) {
-        if (!admin.isAdmin()) {
+        if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can suspend users.");
             return;
         }
@@ -98,7 +98,7 @@ public class AuthManager {
 
     // Admin reactivates suspended user
     public void reactivateUser(User admin, User targetUser) {
-        if (!admin.isAdmin()) {
+        if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can reactivate users.");
             return;
         }
