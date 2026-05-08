@@ -1,5 +1,6 @@
 package com.eventplanner;
 import java.time.LocalDate;
+import java.util.Queue;
 import java.util.List;
 
 enum eventStatus{
@@ -23,8 +24,8 @@ public class Event {
     String type;
     String description;
     eventStatus status;
-    User[] attendees;
-    List<User> waitlist;
+    List<User> attendees;
+    Queue<User> waitlist;
 
     public Event(int venueID, LocalDate date, String name, String time, String type, int capacity){
         this.venueID = venueID;
@@ -35,8 +36,6 @@ public class Event {
         this.description = "";
         this.capacity = capacity;
         this.status = eventStatus.PUBLISHED;
-
-        this.attendees = new User[capacity];
     }
 
     public Event(int venueID, LocalDate date, String name, String time, String type, String description, int capacity){
@@ -48,8 +47,6 @@ public class Event {
         this.description = description;
         this.capacity = capacity;
         this.status = eventStatus.PUBLISHED;
-
-        this.attendees = new User[capacity];
     }
 
     public boolean isFull(){
@@ -84,8 +81,7 @@ public class Event {
     }
 
     public User removeFirstFromWaitlist(){
-        User removeduser = this.waitlist.get(0);
-        this.waitlist.remove(0);
+        User removeduser = this.waitlist.remove();
         return removeduser;
     }
 
@@ -101,11 +97,11 @@ public class Event {
         return this.status;
     }
 
-    public User[] getAttendeesList(){
+    public List<User> getAttendeesList(){
         return this.attendees;
     }
 
-    public List<User> getWaitlistList(){
+    public Queue<User> getWaitlistList(){
         return this.waitlist;
     }
 

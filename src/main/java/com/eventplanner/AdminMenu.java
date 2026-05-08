@@ -9,7 +9,8 @@ public class AdminMenu {
             System.out.println("\n=== Admin Menu ===");
             System.out.println("1. Add Venue");
             System.out.println("2. View Events");
-            System.out.println("3. Logout");
+            System.out.println("3. List Venues");
+            System.out.println("4. Logout");
 
             int choice = scanner.nextInt();
 
@@ -34,8 +35,11 @@ public class AdminMenu {
                     break;
 
                 case 3:
-                    return;
+                    VenueManager.listVenues();
+                    break;
 
+                case 4:
+                    return;
                 default:
                     System.out.println("Invalid choice.");
             }

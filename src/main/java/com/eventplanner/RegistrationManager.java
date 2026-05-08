@@ -45,7 +45,7 @@ public class RegistrationManager {
         Notification.notifyUser(attendee.getId(), "You have successfully registered for the event.");
     }
 
-    public void cancelRegistration(User attendee, Event event) {
+    public static void cancelRegistration(User attendee, Event event) {
         boolean userRegistered = false;
         for(User u : event.attendees){
             if(u.equals(attendee)) {
@@ -66,7 +66,7 @@ public class RegistrationManager {
         moveNextWaitlistedUser(event);
     }
 
-    public void moveNextWaitlistedUser(Event event) {
+    public static void moveNextWaitlistedUser(Event event) {
         User nextUser = event.removeFirstFromWaitlist();
 
         if (nextUser == null) {
@@ -79,7 +79,7 @@ public class RegistrationManager {
         Notification.notifyUser(nextUser.getId(), "You have been moved from the waitlist to registered.");
     }
 
-    public boolean hasScheduleConflict(User attendee, Event newEvent) {
+    public static boolean hasScheduleConflict(User attendee, Event newEvent) {
         for (Event event : attendee.getRegisteredEvents()) {
             if (event.getDate().equals(newEvent.getDate()) &&
                 event.getTime().equals(newEvent.getTime()) &&

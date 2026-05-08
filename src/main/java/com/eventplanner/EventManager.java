@@ -53,7 +53,7 @@ public class EventManager {
             System.out.println("You do not have permission to perform this action.");
             return;
         }
-        event = null;
+        Database.events.remove(event);
     }
 
     public void changeStatus(User user, Event event, eventStatus status){

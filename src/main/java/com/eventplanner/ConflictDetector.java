@@ -14,8 +14,7 @@ class ConflictDetector {
         );
     }
 
-    public static boolean isVenueAvailable(List<Event> events, int venueId,
-                                           LocalDate date, String time) {
+    public static boolean isVenueAvailable(List<Event> events, int venueId, LocalDate date, String time) {
         return events.stream().noneMatch(e ->
             e.getVenueID() == venueId &&
             e.getDate().equals(date) &&

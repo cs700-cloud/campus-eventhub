@@ -19,7 +19,7 @@ public class VenueManager {
         System.out.println("Venue added: " + venue.getName());
     }
 
-    public void removeVenue(User admin, int venueID) {
+    public static void removeVenue(User admin, int venueID) {
         if (!admin.getRole().equals(Role.ADMIN)) {
             System.out.println("Only admins can remove venues.");
             return;
@@ -46,7 +46,7 @@ public class VenueManager {
         return null;
     }
 
-    public void listVenues() {
+    public static void listVenues() {
         if (Database.venues.isEmpty()) {
             System.out.println("No venues available.");
             return;
@@ -57,7 +57,7 @@ public class VenueManager {
         }
     }
 
-    public boolean isVenueAvailable(int venueID, LocalDate date, String time) {
+    public static boolean isVenueAvailable(int venueID, LocalDate date, String time) {
         for (Event event : Database.events) {
             if (event.getVenueID() == venueID &&
                 event.getDate().equals(date) &&
@@ -71,7 +71,7 @@ public class VenueManager {
         return true;
     }
 
-    public boolean canFitEvent(int venueID, int eventCapacity) {
+    public static boolean canFitEvent(int venueID, int eventCapacity) {
         Venue venue = findVenueById(venueID);
 
         if (venue == null) {
@@ -82,7 +82,7 @@ public class VenueManager {
         return venue.getCapacity() >= eventCapacity;
     }
 
-    public void showVenueEquipment(int venueID) {
+    public static void showVenueEquipment(int venueID) {
         Venue venue = findVenueById(venueID);
 
         if (venue == null) {

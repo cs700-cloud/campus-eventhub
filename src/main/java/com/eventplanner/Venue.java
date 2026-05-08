@@ -28,4 +28,12 @@ public class Venue {
     public String[] getEquipment(){
         return this.equipment;
     }
+
+    public String toString() {
+    return "Venue{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", capacity='" + capacity + '\'' +
+            ", equipment=" + equipment + '}';
+}
 }
